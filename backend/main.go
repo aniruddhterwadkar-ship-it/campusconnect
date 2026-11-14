@@ -4,6 +4,8 @@ import(
 	"log"
     "github.com/joho/godotenv"
 	"campusconnect/backend/database"
+	"campusconnect/backend/repository"
+	
 
 )
 
@@ -21,5 +23,22 @@ func main(){
 	}
 	defer db.Close()
 	fmt.Println("MYsql connected sucessfully")
+
+	
+
+	users,err:=repository.GetAllUsers(db)
+	if err!=nil{
+		log.Fatal(err)
+	}
+	for _,user := range users{
+		fmt.Println("ID :",user.ID)
+		fmt.Println("NAME :",user.Name)
+		fmt.Println("Email :",user.Email)
+		fmt.Println("Role :",user.Role)
+
+
+
+
+	}
 
 }
